@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import QuoteCard from '../components/QuoteCard'
 import type { Quote } from '../types'
 import { saveQuotetoStorage } from '../utils/storage'
@@ -26,13 +26,7 @@ const Home = () => {
         }
     };
 
-    const getRandomQuote = (quotesList: Quote[]) => {
-        if (quotesList.length === 0) return null;
-        const ramdomIndex = Math.floor(Math.random() * quotesList.length);
-        return quotesList[ramdomIndex];
-    }
-
-    const loadQuotes = async () => {
+    const loadQuotes = useCallback(async () => {
         setLoading(true);
         const data = await fetchQuotes();
         setQuotes(data);
@@ -41,11 +35,11 @@ const Home = () => {
             setQuoteIndex(1);
         }
         setLoading(false);
-    };
+    }, []);
 
     useEffect(() => {
         loadQuotes();
-    }, []);
+    }, [loadQuotes]);
 
     const handleNextQuote = () => {
         if (quoteIndex < quotes.length) {
