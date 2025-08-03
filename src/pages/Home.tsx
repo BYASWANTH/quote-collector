@@ -16,7 +16,7 @@ const Home = () => {
         }
 
         try {
-            const response = await fetch('http://localhost:4000/api/quotes');
+            const response = await fetch('https://quote-backend-nvf6.onrender.com/api/quotes');
             const data = await response.json()
             localStorage.setItem('quotes', JSON.stringify(data));
             return data;
