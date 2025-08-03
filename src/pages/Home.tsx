@@ -17,7 +17,7 @@ const Home = () => {
 
         try {
             const response = await fetch('http://localhost:4000/api/quotes');
-            const data = await response.json();
+            const data = await response.json()
             localStorage.setItem('quotes', JSON.stringify(data));
             return data;
         } catch (error) {
